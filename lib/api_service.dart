@@ -10,7 +10,7 @@ class ApiService {
 
     final queryParameters = {
       'country': 'us',
-      'category': 'job%20demand',
+      'category': 'technology',
       'apiKey': 'ac1e8817e8174d118412c533363dd697'
     };
 
