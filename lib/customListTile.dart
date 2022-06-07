@@ -14,11 +14,11 @@ Widget customListTile(Article article, BuildContext context) {
       margin: EdgeInsets.all(12.0),
       padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.black54,
           borderRadius: BorderRadius.circular(12.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.black12,
+              color: Colors.blueGrey,
               blurRadius: 3.0,
             ),
           ]),
@@ -61,10 +61,11 @@ Widget customListTile(Article article, BuildContext context) {
           ),
           SizedBox(height: 8.0),
           Text(
-            (article.title).toString(),
+            (article?.title).toString(),
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16.0,
+              color: Colors.white,
             ),
           )
         ],

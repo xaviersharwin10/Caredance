@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'rounded_button.dart';
-
-
 class WelcomeScreen extends StatefulWidget {
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -12,34 +10,40 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.cyan,
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(
-                  "Caredance📚",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-
-                ),
-                RoundedButton(
-                  colour: Colors.lightBlueAccent,
-                  title: 'Log In',
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'login_screen');
-                  },
-                ),
-                RoundedButton(
-                    colour: Colors.blueAccent,
-                    title: 'Register',
+        backgroundColor: Colors.black,
+        body: Container(
+          padding: const EdgeInsets.only(top: 600.0),
+          alignment: Alignment.bottomCenter,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/caredancebg.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+                children: <Widget>[
+                  RoundedButton(
+                    colour: const Color(0xff004AAD),
+                    title: 'Log In',
                     onPressed: () {
-                      Navigator.pushNamed(context, 'registration_screen');
-                    }),
+                      Navigator.pushNamed(context, 'login_screen');
+                    },
+                  ),
+                  RoundedButton(
+                      colour: const Color(0xff25AAD4),
+                      title: 'Register',
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'registration_screen');
+                      }),
 
-              ]),
-        ));
+                ]),
+          ),
+
+        // Padding(
+        //   padding: EdgeInsets.symmetric(horizontal: 24.0),
+
+        ),);
   }
 }

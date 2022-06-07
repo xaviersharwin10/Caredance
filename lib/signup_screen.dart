@@ -7,17 +7,17 @@ import 'rounded_button.dart';
 
 const kTextFieldDecoration = InputDecoration(
   hintText: 'Enter a value',
-  hintStyle: TextStyle(color: Colors.grey),
+  hintStyle: TextStyle(color: Colors.white),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 1.0),
+    borderSide: BorderSide(color: Colors.white, width: 1.0),
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+    borderSide: BorderSide(color: Colors.white, width: 2.0),
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
 );
@@ -35,14 +35,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: ModalProgressHUD(
+      backgroundColor: Colors.black,
+      body: Container
+        (padding: const EdgeInsets.only(top: 100.0),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bluebg2.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextField(
                   keyboardType: TextInputType.emailAddress,
@@ -69,7 +77,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 24.0,
               ),
               RoundedButton(
-                colour: Colors.blueAccent,
+                colour: const Color(0xff004AAD),
                 title: 'Register',
                 onPressed: () async {
                   setState(() {
@@ -99,7 +107,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ],
           ),
         ),
-      ),
+      ),),
     );
   }
 }

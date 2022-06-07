@@ -36,75 +36,189 @@ class _HomeScreenState extends State<HomeScreen> {
     final ButtonStyle style =
     ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
     return Scaffold(
-        appBar: AppBar(
-          leading: null,
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  _auth.signOut();
-                  Navigator.pop(context);
-
-                  //Implement logout functionality
-                }),
-          ],
-
-          title: Text('Home Page'),
-          backgroundColor: Colors.lightBlueAccent,
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+        backgroundColor: Colors.black,
+        // appBar: AppBar(
+        //   leading: null,
+        //   actions: <Widget>[
+        //     IconButton(
+        //         icon: Icon(Icons.close),
+        //         onPressed: () {
+        //           _auth.signOut();
+        //           Navigator.pop(context);
+        //
+        //           //Implement logout functionality
+        //         }),
+        //   ],
+        //
+        //   title: Text('Home Page'),
+        //   backgroundColor: const Color(0xff004AAD),
+        // ),
+        body:
+        SingleChildScrollView(
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, //Center Column contents vertically,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(
-
-                  "Welcome User",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-
+            children: [
+              Card(
+                child: Container(
+                  height: 250,
+                  width: 500,
+                  decoration: BoxDecoration(
+                    //borderRadius: BorderRadius.circular(15.0),
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/caredance.png'))),
                 ),
-                RoundedButton(
-
-                  title: 'Find your Career Path!',
-                  colour: Colors.blueAccent,
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'career_path');
-                  },
-
+              ),
+              Padding(
+                padding:
+                EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                // child: Text(
+                //   "Welcome User",
+                //   style: TextStyle(
+                //     color: Color(0xffffffff),
+                //     fontSize: 30,
+                //     //fontWeight: FontWeight.w300,
+                //     //fontFamily: "CassandraPersonalUseRegular",
+                //     fontFamily: "Montserrat",
+                //   ),
+                // ),
+              ),
+              InkWell(
+                onTap: () {Navigator.pushNamed(context, 'career_path');}, // Handle your callback.
+                splashColor: Colors.brown.withOpacity(0.5),
+                child: Ink(
+                  height: 150,
+                  width: 400,
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+                  child:Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    // children: [
+                    //   Text('Find your Career Path',
+                    //     style: TextStyle(fontSize: 20.0, color: Colors.black),),
+                    // ],
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/careerpath.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 9),
-                RoundedButton(
-                  title: 'View Mentors',
-                  colour: Colors.blueAccent,
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'mentors_list');
-                  },
+              ),
+              Padding(
+                padding:
+                EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                child: Text(
+                  "",
+                  style: TextStyle(
+                    color: Color(0xffffffff),
+                    fontSize: 01,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: "Roboto",
+                  ),
                 ),
-                const SizedBox(height: 9),
-                RoundedButton(
-                  title: 'View Exams',
-                  colour: Colors.blueAccent,
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'exams_list');
-                  },
+              ),
+              InkWell(
+                onTap: () {Navigator.pushNamed(context, 'mentors_list');}, // Handle your callback.
+                splashColor: Colors.brown.withOpacity(0.5),
+                child: Ink(
+                  height: 150,
+                  width: 400,
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+                  child:Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    // children: [
+                    //   Text('View Mentors',
+                    //     style: TextStyle(fontSize: 20.0, color: Colors.black),),
+                    // ],
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/mentor.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 9),
-                RoundedButton(
-
-                  title: 'Job News',
-                  colour: Colors.blueAccent,
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'news');
-                  },
-
+              ),
+              Padding(
+                padding:
+                EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                child: Text(
+                  "",
+                  style: TextStyle(
+                    color: Color(0xffffffff),
+                    fontSize: 01,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: "Roboto",
+                  ),
                 ),
-
-
-
-              ]
-
+              ),
+              InkWell(
+                borderRadius: BorderRadius.circular(25.0),
+                onTap: () {Navigator.pushNamed(context, 'exams_list');}, // Handle your callback.
+                splashColor: Colors.brown.withOpacity(0.5),
+                child: Ink(
+                  height: 150,
+                  width: 400,
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+                  child:Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    // children: [
+                    //   Text('View Exams',
+                    //     style: TextStyle(fontSize: 20.0, color: Colors.black),),
+                    // ],
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/exams.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding:
+                EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                child: Text(
+                  "",
+                  style: TextStyle(
+                    color: Color(0xffffffff),
+                    fontSize: 01,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: "Roboto",
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {Navigator.pushNamed(context, 'news');}, // Handle your callback.
+                splashColor: Colors.brown.withOpacity(0.5),
+                child: Ink(
+                  height: 150,
+                  width: 400,
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+                  child:Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    // children: [
+                    //   Text('Job News',
+                    //     style: TextStyle(fontSize: 20.0, color: Colors.black),),
+                    // ],
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/jobnews.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         )
     );

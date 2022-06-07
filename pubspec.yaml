@@ -50,7 +50,8 @@ dev_dependencies:
   cloud_firestore: ^0.14.1
   http: ^0.12.2
   integration_test:
-
+  hexcolor: ^2.0.3
+  url_launcher: ^5.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -63,9 +64,18 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/caredancebg.png
+    - assets/images/caredance.png
+    - assets/images/bluebg1.png
+    - assets/images/bluebg2.png
+    - assets/images/bluebg3.png
+    - assets/images/bluebg4.png
+    - assets/images/careerpath.png
+    - assets/images/career.png
+    - assets/images/mentor.png
+    - assets/images/exams.png
+    - assets/images/jobnews.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -78,6 +88,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: CassandraPersonalUseRegular
+      fonts:
+        - asset: fonts/CassandraPersonalUseRegular-3BjG.ttf
+          weight: 400
+    - family: ChickenQuiche
+      fonts:
+        - asset: fonts/ChickenQuiche-ALJDL.ttf
+          weight: 400
   # fonts:
   #   - family: Schyler
   #     fonts:

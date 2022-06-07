@@ -37,6 +37,7 @@ class _HomeScreenState extends State<News> {
     final ButtonStyle style =
     ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         leading: null,
         actions: <Widget>[
@@ -51,7 +52,7 @@ class _HomeScreenState extends State<News> {
         ],
 
         title: Text('News'),
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.black,
       ),
       body:
       FutureBuilder(

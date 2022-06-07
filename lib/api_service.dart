@@ -10,11 +10,11 @@ class ApiService {
 
     final queryParameters = {
       'country': 'us',
-      'category': 'technology',
-      'apiKey': 'ac1e8817e8174d118412c533363dd697'
+      'category': 'job demands',
+      'apiKey': '85d03900389949e2997fbd53078c2df5'
     };
-
-    final uri = Uri.https(endPointUrl, '/v2/top-headlines', queryParameters);
+    // ac1e8817e8174d118412c533363dd697
+    final uri = 'https://newsapi.org/v2/everything?q=naukri&sortBy=popularity&apiKey=ac1e8817e8174d118412c533363dd697';
     final response = await client.get(uri);
     Map<String, dynamic> json = jsonDecode(response.body);
     List<dynamic> body = json['articles'];
