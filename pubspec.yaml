@@ -68,6 +68,7 @@ flutter:
     - assets/images/caredancebg.png
     - assets/images/caredance.png
     - assets/images/bluebg1.png
+    - assets/images/bluebg_1.png
     - assets/images/bluebg2.png
     - assets/images/bluebg3.png
     - assets/images/bluebg4.png
@@ -76,6 +77,8 @@ flutter:
     - assets/images/mentor.png
     - assets/images/exams.png
     - assets/images/jobnews.png
+    - assets/images/bulb1.png
+    - assets/images/bulb.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

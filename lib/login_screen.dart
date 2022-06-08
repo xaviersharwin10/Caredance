@@ -93,17 +93,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     setState(() {
                       showSpinner = true;
                     });
-                    // try {
-                       // final user = await _auth.signInWithEmailAndPassword(
-                       //     email: email, password: password);
-                       // if (user != null) {
+                    try {
+                       final user = await _auth.signInWithEmailAndPassword(
+                           email: email, password: password);
+                       if (user != null) {
                         Navigator.pushNamed(context, 'home_screen');
-                     // }
+                     }
 
-                     // } catch (e) {
-                     //   print(e);
-                     //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                     // }
+                     } catch (e) {
+                       print(e);
+                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                     }
                     setState(() {
                       showSpinner = false;
                     });
