@@ -108,7 +108,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
             Container(
               alignment: Alignment.center,
-              padding: const EdgeInsets.only(top: 40.0),
+              padding: const EdgeInsets.all(40.0),
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance.collection('Streams').snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -128,12 +128,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 50),
                         Text(
                           "Select your field of Interest",
-                          style: TextStyle(fontSize: 25.0),
+                          style: TextStyle(fontSize: 23.0),
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 10),
                         DropdownButton(
                           // Initial Value
                           value: temp,
@@ -156,12 +156,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             });
                           },
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 20),
                         Text(
                           "Grade",
-                          style: TextStyle(fontSize: 25.0),
+                          style: TextStyle(fontSize: 23.0),
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 10),
                         DropdownButton(
                           // Initial Value
                           value: dropdownvalue,
@@ -186,7 +186,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             });
                           },
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: ElevatedButton(
@@ -280,7 +280,7 @@ class _SecondScreenState extends State<SecondScreen> {
               ),
               Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.only(top: 40.0),
+                padding: const EdgeInsets.all(40.0),
                 child:ModalProgressHUD(
                   inAsyncCall: showSpinner,
                   child: StreamBuilder<QuerySnapshot>(
@@ -314,12 +314,22 @@ class _SecondScreenState extends State<SecondScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: 50,
+                                height: 30,
+                              ),
+                              Text(
+                                "Here are the domains that match your field of interest",
+                                style: TextStyle(fontSize: 22.0,color: Colors.blue),textAlign: TextAlign.center,
+                              ),
+                              SizedBox(
+                                height: 30,
                               ),
                               // Step 4 <-- SEE HERE
                               Text(
                                 '${widget.text1}',
-                                style: TextStyle(fontSize: 25),
+                                style: TextStyle(fontSize: 25),textAlign: TextAlign.center,
+                              ),
+                              SizedBox(
+                                height: 20,
                               ),
 
 
@@ -356,7 +366,7 @@ class _SecondScreenState extends State<SecondScreen> {
                               //   ),
                               // ),
 
-                              const SizedBox(height: 3),
+                              const SizedBox(height: 10),
                             ],
                           ),
                         );
@@ -417,7 +427,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                 decoration: BoxDecoration(
                   // color: Colors.black,
                   image: DecorationImage(
-                    image: AssetImage("assets/images/bulb1.png"),
+                    image: AssetImage("assets/images/bulb2.png"),
                     fit: BoxFit.cover,
                   ),
                   boxShadow: [
@@ -435,7 +445,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
               ),
               Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.only(top: 40.0),
+                padding: const EdgeInsets.all(40.0),
 
                 child:ModalProgressHUD(
                   inAsyncCall: showSpinner,
@@ -469,12 +479,21 @@ class _ThirdScreenState extends State<ThirdScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: 50,
+                                height: 30,
                               ),
-                              // Step 4 <-- SEE HERE
+                              Text(
+                                "Here are the professions that match your domain",
+                                style: TextStyle(fontSize: 22.0,color: Colors.blue),textAlign: TextAlign.center,
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
                               Text(
                                 '${widget.text1}',
-                                style: TextStyle(fontSize: 25),
+                                style: TextStyle(fontSize: 25),textAlign: TextAlign.center,
+                              ),
+                              SizedBox(
+                                height: 20,
                               ),
 
                               DropdownButton<String>(
@@ -514,7 +533,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                               //   ),
                               // ),
 
-                              const SizedBox(height: 3),
+                              const SizedBox(height: 10),
                             ],
                           ),
                         );
@@ -620,20 +639,20 @@ class _FourthScreenState extends State<FourthScreen> {
                         // Step 4 <-- SEE HERE
                         Text(
                           'You have chosen to become a ${blah}',
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 16, color: Colors.blue),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 5),
-                        Text(
-                          'We have generated the data below based on your inputs!',
-                          style: TextStyle(fontSize: 16),
-                          textAlign: TextAlign.center,
-                        ),
+                        // Text(
+                        //   'We have generated the data below based on your inputs!',
+                        //   style: TextStyle(fontSize: 16, color: Colors.blue),
+                        //   textAlign: TextAlign.center,
+                        // ),
                         const SizedBox(height: 5),
 
                         Text(
                           'You can take the below courses to reach your goal of becoming a ${blah}',
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 16,color: Colors.blue),
                           textAlign: TextAlign.center,
                         ),
 
@@ -686,7 +705,7 @@ class _FourthScreenState extends State<FourthScreen> {
                                     const SizedBox(height: 10),
                                     Text(
                                       'Below are the top rated colleges which offer those courses',
-                                      style: TextStyle(fontSize: 16),
+                                      style: TextStyle(fontSize: 16, color: Colors.blue),
                                       textAlign: TextAlign.center,
                                     ),
 
@@ -721,18 +740,7 @@ class _FourthScreenState extends State<FourthScreen> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 16.0),
-                                      // child: ElevatedButton(
-                                      //   onPressed: () {
-                                      //     // // _sendDataToFifthScreen(context);
-                                      //
-                                      //     print(subdomains2);
-                                      //     print(subdomains1);
-                                      //     // print(snap1);
-                                      //
-                                      //   },
-                                      //
-                                      //   child: const Text('Submit'),
-                                      // ),
+
                                     )
                                   ],
                                 ),

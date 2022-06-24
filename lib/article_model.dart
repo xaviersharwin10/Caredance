@@ -1,7 +1,7 @@
 import 'source_model.dart';
 class Article {
-  Source?source;
-  String?author;
+  Source ?source;
+  String ?author;
   String ?title;
   String ?description;
   String ?url;
@@ -9,7 +9,8 @@ class Article {
   String ?publishedAt;
   String ?content;
   Article(
-      {this.source,
+      {
+        this.source,
         this.author,
         this.title,
         this.description,
