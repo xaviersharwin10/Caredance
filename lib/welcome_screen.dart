@@ -37,13 +37,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       onPressed: () {
                         Navigator.pushNamed(context, 'registration_screen');
                       }),
-
                 ]),
           ),
-
-        // Padding(
-        //   padding: EdgeInsets.symmetric(horizontal: 24.0),
-
         ),);
   }
 }

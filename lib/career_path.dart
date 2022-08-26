@@ -12,7 +12,6 @@ void main() async {
 
 class Career_Path extends StatelessWidget {
   const Career_Path({Key? key}) : super(key: key);
-
   static const String _title = 'Enter Your Details!';
 
   @override
@@ -22,43 +21,23 @@ class Career_Path extends StatelessWidget {
       theme: ThemeData.dark(),
       title: _title,
       home: Scaffold(
-        // appBar: AppBar(
-        //   //title: const Text(_title),
-        //   backgroundColor: Colors.black,),
-        body: const MyStatefulWidget(),
+        body: const GradeScreen(),
       ),
     );
   }
 }
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+class GradeScreen extends StatefulWidget {
+  const GradeScreen({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<GradeScreen> createState() => _GradeScreen();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _GradeScreen extends State<GradeScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  // List<String> _accountType=<String>[
-  //   'Savings',
-  //   'Deposit',
-  //   'Checking',
-  //   'Brokerage'
-  // ];
-  String dropdownvalue = '6';
+  String dropdownvalue = '10';
   var temp, temp2;
-  // var collection = FirebaseFirestore.instance.collection('Streams');
-  // var docSnapshot = await collection.doc('doc_id').get();
   var grades = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
     '9',
     '10',
     '11',
@@ -110,7 +89,155 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               alignment: Alignment.center,
               padding: const EdgeInsets.all(40.0),
               child: StreamBuilder(
-                stream: FirebaseFirestore.instance.collection('Streams').snapshots(),
+                stream: FirebaseFirestore.instance.collection('Subjects').snapshots(),
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  return Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+
+                        const SizedBox(height: 20),
+                        Text(
+                          "Which Grade are you?",
+                          style: TextStyle(fontSize: 23.0),
+                        ),
+                        const SizedBox(height: 10),
+                        DropdownButton(
+                          // Initial Value
+                          value: dropdownvalue,
+                          // controller: dropdowncontroller,
+                          // Down Arrow Icon
+                          dropdownColor: const Color(0xff004AAD),
+                          icon: const Icon(Icons.keyboard_arrow_down),
+
+
+                          // Array list of items
+                          items: grades.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items),
+                            );
+                          }).toList(),
+                          // After selecting the desired option,it will
+                          // change button value to selected value
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              temp = newValue!;
+                              if(temp=='11'||temp=='12'){
+                                _sendDataToNormalFlow(context);
+                              }
+                              else {
+                                _sendDataToMyStatefulWidget2(context);
+                              }});
+                          },
+                        ),
+
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  void _sendDataToNormalFlow(BuildContext context){
+    // String textToSend = textFieldController.text;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyStatefulWidget3(text1: temp),
+        ));
+    // );
+  }
+  void _sendDataToMyStatefulWidget2(BuildContext context) {
+    // String textToSend = textFieldController.text;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyStatefulWidget2(text1: temp),
+        ));
+    // );
+  }
+}
+
+
+class MyStatefulWidget2 extends StatefulWidget {
+  const MyStatefulWidget2({Key? key,required this.text1}) : super(key: key);
+  final String? text1;
+
+  @override
+  State<MyStatefulWidget2> createState() => _MyStatefulWidgetState2();
+}
+
+class _MyStatefulWidgetState2 extends State<MyStatefulWidget2> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String dropdownvalue = '6';
+  var temp, temp2;
+  var grades = [
+    '9',
+    '10',
+    '11',
+    '12',
+  ];
+
+  var temps = [
+    'Software Engineering',
+    'Mechanical Engineering',
+    'Finance',
+    'Human Resources',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          //color: Colors.black,
+          image: DecorationImage(
+            image: AssetImage("assets/images/bluebg_1.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Stack(
+          children: [
+            Container(
+              height: 250,
+              decoration: BoxDecoration(
+                // color: Colors.black,
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bulb.png"),
+                  fit: BoxFit.cover,
+                ),
+
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0,5),
+                    blurRadius: 50,
+                    color: Colors.lightBlueAccent.withOpacity(0.23),
+                  ),
+                ],
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(36),
+                  bottomRight: Radius.circular(36),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(40.0),
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance.collection('Subjects').snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) {
                     return Center(
@@ -121,7 +248,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     temp = snapshot.data!.docs[0].id;
                     // debugPrint('setDefault make: $temp');
                   }
-
+                print(widget.text1);
                   return Form(
                     key: _formKey,
                     child: Column(
@@ -130,7 +257,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       children: <Widget>[
                         const SizedBox(height: 50),
                         Text(
-                          "Select your field of Interest",
+                          "Choose your favorite subject",
                           style: TextStyle(fontSize: 23.0),
                         ),
                         const SizedBox(height: 10),
@@ -156,36 +283,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             });
                           },
                         ),
-                        const SizedBox(height: 20),
-                        Text(
-                          "Grade",
-                          style: TextStyle(fontSize: 23.0),
-                        ),
-                        const SizedBox(height: 10),
-                        DropdownButton(
-                          // Initial Value
-                          value: dropdownvalue,
-                          // controller: dropdowncontroller,
-                          // Down Arrow Icon
-                          dropdownColor: const Color(0xff004AAD),
-                          icon: const Icon(Icons.keyboard_arrow_down),
-
-
-                          // Array list of items
-                          items: grades.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
-                          // After selecting the desired option,it will
-                          // change button value to selected value
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              dropdownvalue = newValue!;
-                            });
-                          },
-                        ),
                         const SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -195,7 +292,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               // the form is invalid.
                               if (_formKey.currentState!.validate()) {
                                 // Process data.
-                                _sendDataToSecondScreen(context);
+                                _sendDataToMyStatefulWidget1(context);
                               }
                             },
                             child: const Text('Submit'),
@@ -208,6 +305,302 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _sendDataToMyStatefulWidget1(BuildContext context) {
+    // String textToSend = textFieldController.text;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyStatefulWidget1(text1: temp),
+        ));
+    // );
+  }
+}
+
+class MyStatefulWidget1 extends StatefulWidget {
+  const MyStatefulWidget1({Key? key,required this.text1}) : super(key: key);
+  final String? text1;
+  @override
+  State<MyStatefulWidget1> createState() => _MyStatefulWidgetState1();
+}
+
+class _MyStatefulWidgetState1 extends State<MyStatefulWidget1> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String dropdownvalue = '6';
+  var temp, temp2;
+  var lenth1;
+  List<DropdownMenuItem> subdomains = [];
+  List<String> subdomains1 = [];
+  var grades = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+  ];
+  var temp4;
+  var temps = [
+    'Software Engineering',
+    'Mechanical Engineering',
+    'Finance',
+    'Human Resources',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          //color: Colors.black,
+          image: DecorationImage(
+            image: AssetImage("assets/images/bluebg_1.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Stack(
+          children: [
+            Container(
+              height: 250,
+              decoration: BoxDecoration(
+                // color: Colors.black,
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bulb.png"),
+                  fit: BoxFit.cover,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0,5),
+                    blurRadius: 50,
+                    color: Colors.lightBlueAccent.withOpacity(0.23),
+                  ),
+                ],
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(36),
+                  bottomRight: Radius.circular(36),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(40.0),
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Subjects')
+                      .where('name', isEqualTo: widget.text1)
+                      .snapshots(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    DocumentSnapshot snap = snapshot.data!.docs[0];
+                    lenth1 = snap.get("sub-subjects").length;
+                    print(lenth1);
+                    for (var i = 0; i < lenth1; i++) {
+                      subdomains1.add(snap.get("sub-subjects")[i].toString());
+                    }
+                    if(!snapshot.hasData){
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+
+                    temp = snapshot.data!.docs[0].get("sub-subjects")[0].toString();
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            "Select your field of interest",
+                            style: TextStyle(fontSize: 22.0,color: Colors.blue),textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          // Step 4 <-- SEE HERE
+                          Text(
+                            '${widget.text1}',
+                            style: TextStyle(fontSize: 25),textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+
+
+                          DropdownButton<String>(
+                              dropdownColor: const Color(0xff004AAD),
+                              value: temp,
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              items: subdomains1
+                                  .map((value){
+                                return DropdownMenuItem(
+                                  value: value,
+                                  child: Text('${value}'),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                temp = value!;
+                                temp4 = value!;
+                                _sendDataToSecondScreen(context);
+
+                              }
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    );
+                  }),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _sendDataToSecondScreen(BuildContext context) {
+    // String textToSend = textFieldController.text;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SecondScreen(text1: temp),
+        ));
+    // );
+  }
+}
+class MyStatefulWidget3 extends StatefulWidget {
+  const MyStatefulWidget3({Key? key,required this.text1}) : super(key: key);
+  final String? text1;
+  @override
+  State<MyStatefulWidget3> createState() => _MyStatefulWidgetState3();
+}
+
+class _MyStatefulWidgetState3 extends State<MyStatefulWidget3> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // List<String> _accountType=<String>[
+  //   'Savings',
+  //   'Deposit',
+  //   'Checking',
+  //   'Brokerage'
+  // ];
+  String dropdownvalue = '6';
+  var temp, temp2;
+  // var collection = FirebaseFirestore.instance.collection('Streams');
+  // var docSnapshot = await collection.doc('doc_id').get();
+  var grades = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+  ];
+
+  var temps = [
+    'Software Engineering',
+    'Mechanical Engineering',
+    'Finance',
+    'Human Resources',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.only(top: 40.0),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bluebg1.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('Streams').snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (!snapshot.hasData) {
+              temp = snapshot.data!.docs[0].id;
+              // debugPrint('setDefault make: $temp');
+            }
+
+            return Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const SizedBox(height: 30),
+                  Text(
+                    "Select your field of Interest",
+                    style: TextStyle(fontSize: 25.0),
+                  ),
+                  const SizedBox(height: 3),
+                  DropdownButton(
+                    // Initial Value
+                    value: temp,
+                    dropdownColor: const Color(0xff004AAD),
+                    // Down Arrow Icon
+                    icon: const Icon(Icons.keyboard_arrow_down),
+
+                    // Array list of items
+                    items: snapshot.data!.docs.map((value) {
+                      return DropdownMenuItem(
+                        value: value.id,
+                        child: Text('${value.id}'),
+                      );
+                    }).toList(),
+                    // After selecting the desired option,it will
+                    // change button value to selected value
+                    onChanged: (value) {
+                      setState(() {
+                        temp = value!;
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 5),
+
+                  const SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Validate will return true if the form is valid, or false if
+                        // the form is invalid.
+                        if (_formKey.currentState!.validate()) {
+                          // Process data.
+                          _sendDataToSecondScreen(context);
+                        }
+                      },
+                      child: const Text('Submit'),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
@@ -242,8 +635,6 @@ class _SecondScreenState extends State<SecondScreen> {
   List<DropdownMenuItem> subdomains = [];
   List<String> subdomains1 = [];
   bool showSpinner = false;
-
-  // var db = firebase.firestore();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -351,22 +742,7 @@ class _SecondScreenState extends State<SecondScreen> {
 
                                   }
                               ),
-                              // Padding(
-                              //   padding: const EdgeInsets.symmetric(vertical: 16.0),
-                              //   child: ElevatedButton(
-                              //     onPressed: () {
-                              //       // Validate will return true if the form is valid, or false if
-                              //       // the form is invalid.
-                              //
-                              //       // Process data.
-                              //       _sendDataToThirdScreen(context);
-                              //
-                              //     },
-                              //     child: const Text('Submit'),
-                              //   ),
-                              // ),
-
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 30),
                             ],
                           ),
                         );
@@ -512,26 +888,6 @@ class _ThirdScreenState extends State<ThirdScreen> {
                                     _sendDataToFourthScreen(context);
                                   }
                               ),
-                              // Padding(
-                              //   padding: const EdgeInsets.symmetric(vertical: 16.0),
-                              //   child: ElevatedButton(
-                              //     style: ElevatedButton.styleFrom(
-                              //       // primary: const Color(0xff004AAD),// background
-                              //       // onPrimary: const Color(0xff004AAD),
-                              //       elevation: 20,  // Elevation
-                              //       shadowColor: Colors.lightBlueAccent,// foreground
-                              //     ),
-                              //     onPressed: () {
-                              //       // Validate will return true if the form is valid, or false if
-                              //       // the form is invalid.
-                              //       _sendDataToFourthScreen(context);
-                              //       // Process data.
-                              //       // _sendDataToThirdScreen(context);
-                              //
-                              //     },
-                              //     child: const Text('Submit'),
-                              //   ),
-                              // ),
 
                               const SizedBox(height: 10),
                             ],
@@ -619,15 +975,7 @@ class _FourthScreenState extends State<FourthScreen> {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-
-                  // debugPrint(snapshot.data!.docs[0].get('sub-domains'));
-
                 }
-
-                // temp4 = 'One';
-                // temp5 = snapshot.data!.get('sub-domains');
-                // debugPrint('setDefault make: $temp4');
-
                 return Center(
                   child:SingleChildScrollView(
                     child: Column(
@@ -643,11 +991,6 @@ class _FourthScreenState extends State<FourthScreen> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 5),
-                        // Text(
-                        //   'We have generated the data below based on your inputs!',
-                        //   style: TextStyle(fontSize: 16, color: Colors.blue),
-                        //   textAlign: TextAlign.center,
-                        // ),
                         const SizedBox(height: 5),
 
                         Text(
@@ -655,9 +998,6 @@ class _FourthScreenState extends State<FourthScreen> {
                           style: TextStyle(fontSize: 16,color: Colors.blue),
                           textAlign: TextAlign.center,
                         ),
-
-
-// for (var bushy=0;bushy<subdomains2.length;bushy++){
                         StreamBuilder<QuerySnapshot>(
                             stream: FirebaseFirestore.instance
                                 .collection('Colleges').where('ug_courses',arrayContainsAny: subdomains2)
@@ -854,10 +1194,6 @@ class _FourthScreenState extends State<FourthScreen> {
 
                                 ),
                               ),
-                              // Text(
-                              //   'Below are the courses offered by''$arg1',
-                              //   style: TextStyle(fontSize: 12.0),
-                              // ),
                               Container(
                                 width: double.infinity,
                                 height: 100,
@@ -917,13 +1253,7 @@ class _FourthScreenState extends State<FourthScreen> {
         });
   }
   void _sendDataToFifthScreen(BuildContext context) {
-    // String textToSend = textFieldController.text;
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => SecondScreen(text1: temp4),
-    //     ));
-    // );
+    
   }
 
 

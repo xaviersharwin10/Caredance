@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,15 @@ class AddData extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text("Mentors List"),
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+      dynamic conversationObject = {
+      'appId': 'bd0eeed38d0918876b05ccc3a1f19037',// The APP_ID obtained from kommunicate dashboard.
+      };
+      KommunicateFlutterPlugin.buildConversation(conversationObject) .then((clientConversationId) { print("Conversation builder success : " + clientConversationId.toString()); }).catchError((error) { print("Conversation builder error : " + error.toString()); });
+      },
+          tooltip: "assistant button",
+          child: Icon(Icons.message)
       ),
       body: Container(
         alignment: Alignment.center,

@@ -99,7 +99,6 @@ class _LoginScreenState extends State<LoginScreen> {
                        if (user != null) {
                         Navigator.pushNamed(context, 'home_screen');
                      }
-
                      } catch (e) {
                        print(e);
                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
